@@ -1,0 +1,50 @@
+@startuml user
+
+entity profile {
+    <<PK>> id int
+    --
+    firstname varchar(15)
+    lastname varchar(15)
+    phone varchar(15)
+    --
+    <<FK>> account_id int
+}
+
+entity account {
+    <<PK>> id int
+    --
+    username varchar(15)
+    password text
+    token text
+    deleted_at timestamp
+}
+
+entity image {
+    <<PK>> id int
+    --
+    url text
+    width int(5)
+    height int(5)
+    deleted_at timestamp
+    --
+    <<FK>> account_id int
+}
+
+entity address {
+    <<PK>> id int
+    --
+    address varchar(50)
+    subdistrict varchar(50)
+    city varchar(50)
+    province varchar(50)
+    zip_code varchar(10)
+    --
+    <<FK>> account_id int
+}
+
+account ||--|| profile
+account ||--o{ image
+account ||--o{ address
+
+
+@enduml

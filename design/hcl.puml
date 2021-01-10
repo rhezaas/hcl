@@ -1,0 +1,18 @@
+@startuml hcl
+
+node "Gateway" {
+    component Middleware {
+        component Authorization
+    }
+
+    component Controller
+}
+
+node "User" {
+    component Account
+}
+
+Authorization #-(0-# Account    :Login
+Middleware #-(0-# Controller
+
+@enduml

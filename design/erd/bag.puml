@@ -1,0 +1,25 @@
+@startuml order
+
+entity item {
+    <<PK>> id int
+    --
+    brand varchar(10)
+    product varchar(10)
+    size varchar(10)
+    colors varchar(10)
+    price int(10)
+}
+
+entity promo {
+    title varchar(10)
+    discount int
+    --
+    <<FK>> item_id int
+}
+
+entity shipment {
+    
+    <<FK>> item_id
+}
+
+@enduml
