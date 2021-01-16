@@ -1,3 +1,6 @@
 [submodule "gateway"]
 	path = gateway
 	url = git@github.com:rhezaas/hcl-gateway.git
+[submodule "user_service"]
+	path = user_service
+	url = git@github.com:rhezaas/hcl-user-service.git
