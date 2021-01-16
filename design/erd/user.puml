@@ -27,7 +27,7 @@ entity image {
     height int(5)
     deleted_at timestamp
     --
-    <<FK>> account_id int
+    <<FK>> profile_id int
 }
 
 entity address {
@@ -39,12 +39,12 @@ entity address {
     province varchar(50)
     zip_code varchar(10)
     --
-    <<FK>> account_id int
+    <<FK>> profile_id int
 }
 
 account ||--|| profile
-account ||--o{ image
-account ||--o{ address
+profile ||--o{ image
+profile ||--o{ address
 
 
 @enduml

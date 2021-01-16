@@ -1,4 +1,40 @@
-@startuml order
+@startuml bag
+
+entity user {
+    <<PK>> id int
+    --
+    account_id int
+    firstname varchar(10)
+    lastname varchar(10)
+    phone varchar(10)
+}
+
+entity address {
+    <<PK>> id int
+    --
+    title varchar(10)
+    address text
+    subdistrict varchar(10)
+    city varchar(10)
+    province varchar(10)
+    zipcode varchar(10)
+    --
+    <<FK>> user_id
+}
+
+entity bag {
+    <<PK>> id int
+    --
+    created_at timestamp
+    status BAG_STATUSES
+    --
+    <<FK>> user_id int
+}
+
+enum BAG_STATUSES {
+    OPEN
+    CLOSED
+}
 
 entity item {
     <<PK>> id int
@@ -6,20 +42,47 @@ entity item {
     brand varchar(10)
     product varchar(10)
     size varchar(10)
-    colors varchar(10)
-    price int(10)
+    color varchar(10)
+    quantity int(5)
+    service PRODUCT_SERVICE
+    --
+    <<PK>><<FK>> bag_id int
+    <<FK>> shipment_id int
+}
+
+enum PRODUCT_SERVICE {
+    ORDER
+    RENTAL
+    HOME_TRY
 }
 
 entity promo {
-    title varchar(10)
-    discount int
+    <<PK>> id int
     --
-    <<FK>> item_id int
+    title varchar(10)
+    discount int(10)
+    --
+    <<FK>> item_id
 }
 
 entity shipment {
-    
-    <<FK>> item_id
+    <<PK>> id int
+    --
+    courier varchar(10)
+    service varchar(10)
+    note text
+    rate int(5)
+    --
+    <<FK>> address_id int
 }
+
+BAG_STATUSES -- bag
+bag }|--|| user
+address }|--|| user
+PRODUCT_SERVICE -- item
+bag ||--|{ item
+promo }o--|{ item
+address ||--o{ shipment
+item }|--|| shipment
 
 @enduml

@@ -1,18 +1,33 @@
 @startuml hcl
 
-node "Gateway" {
-    component Middleware {
-        component Authorization
-    }
+rectangle gateway
+rectangle user_service
+rectangle bag_service
+rectangle order_service
+rectangle rental_service
+rectangle home_try_service
+rectangle broker
+rectangle payment_service
+rectangle shipment_service
+rectangle notification_service
+rectangle product_service
+rectangle promo_service
 
-    component Controller
-}
+gateway <--> user_service : http
+gateway <--> bag_service : http
+gateway <-- order_service : http
+gateway <-- rental_service : http
+gateway <-- home_try_service : http
+product_service <--> gateway : http
+promo_service <--> gateway : http
+shipment_service --> gateway : http
 
-node "User" {
-    component Account
-}
-
-Authorization #-(0-# Account    :Login
-Middleware #-(0-# Controller
+bag_service -[dashed]-> broker : message
+order_service <-[dashed]- broker   : message
+rental_service <-[dashed]- broker   : message
+home_try_service <-[dashed]- broker   : message
+broker <-[dashed]-> shipment_service : message
+broker <-[dashed]-> payment_service : message
+broker -[dashed]-> notification_service : message
 
 @enduml

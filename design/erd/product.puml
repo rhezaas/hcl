@@ -1,0 +1,79 @@
+@startuml product
+
+entity brand {
+    <<PK>> id int
+    --
+    created_at timestamp
+    updated_at timestamp
+    title varchar(10)
+    deleted_at timestamp
+}
+
+entity product {
+    <<PK>> id int
+    --
+    created_at timestamp
+    updated_at timestamp
+    title varchar(10)
+    deleted_at timestamp
+    --
+    <<FK>> brand_id int
+}
+
+entity variant {
+    <<PK>> id int
+    --
+    created_at timestamp
+    updated_at timestamp
+    title varchar(10)
+    deleted_at timestamp
+    --
+    <<FK>> product_id
+    <<FK>> color_id
+    <<FK>> size_id
+}
+
+enum ITEM_STATUS {
+    AVAILABLE
+    UNAVAILABLE
+}
+
+entity item {
+    <<PK>> id int
+    --
+    status ITEM_STATUS
+    --
+    <<FK>> variant_id
+}
+
+entity color {
+    <<PK>> id int
+    --
+    title varchar(10)
+    hex varchar(5)
+}
+
+entity size {
+    <<PK>> id int
+    --
+    type varchar(5)
+    title varchar(10)
+}
+
+entity category {
+    <<PK>> id int
+    --
+    title varchar(10)
+    --
+    <<FK>> category_id int
+}
+
+product }o--|| brand
+product ||--|{ variant
+item -- ITEM_STATUS
+item }|--|| variant
+variant }o--|| color
+variant }o--|| size
+product }o--|| category
+
+@enduml

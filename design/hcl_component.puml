@@ -1,0 +1,32 @@
+@startuml hcl_component
+
+node Gateway {
+    component Gateway.Middleware {
+        component Gateway.Middleware.Authorization
+    }
+
+    component Gateway.Account {
+        component Gateway.Account.Login
+        component Gateway.Account.Register
+    }
+
+    component Gateway.User {
+        component Gateway.User.UploadImages
+    }
+
+    component Gateway.Bag
+}
+
+node User {
+    component User.Account
+    component User.Profile
+}
+
+Gateway.Account.Login #-(0-# User.Account
+Gateway.Account.Register #-(0-# User.Account
+Gateway.Middleware.Authorization #-(0-# User.Account
+
+Gateway.User.UploadImages #-(0-# Gateway.Middleware
+Gateway.User.UploadImages #-(0-# User.Profile
+
+@enduml
