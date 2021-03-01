@@ -4,3 +4,6 @@
 [submodule "user_service"]
 	path = user_service
 	url = git@github.com:rhezaas/hcl-user-service.git
+[submodule "hcl-bag-service"]
+	path = hcl-bag-service
+	url = git@github.com:rhezaas/hcl-bag-service.git
