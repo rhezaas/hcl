@@ -7,6 +7,3 @@
 [submodule "bag_service"]
 	path = bag_service
 	url = git@github.com:rhezaas/hcl-bag-service.git
-[submodule "Tester"]
-	path = Tester
-	url = git@github.com:rhezaas/test.git
